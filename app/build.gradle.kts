@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -25,10 +24,12 @@ android {
         debug {
             signingConfig = signingConfigs.getByName("debug")
             isDebuggable = true
+            buildConfigField("String", "BASE_URL", "\"https://api.notion.com/\"")
         }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "BASE_URL", "\"https://api.notion.com/\"")
         }
     }
 
@@ -64,6 +65,9 @@ dependencies {
 
     // Retrofit + OkHttp
     implementation(libs.bundles.retrofit)
+
+    // Notion SDK
+    implementation(libs.notion.sdk)
 
     // Tests
     testImplementation(libs.test.junit)

@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Notion Todo"
 include(":app")
- 
