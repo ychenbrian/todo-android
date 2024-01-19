@@ -11,6 +11,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     override val viewModel: HomeViewModel by viewModels()
 
     override fun setupView() {
+        viewModel.main()
     }
 
     override fun setupObserver() {

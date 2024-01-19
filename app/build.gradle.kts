@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -15,21 +17,35 @@ android {
         minSdk = 24
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0.0"
+        versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    val secretProperties = Properties()
+    file("secret.properties").inputStream().use {
+        secretProperties.load(it)
+    }
+    val bearerToken = secretProperties.getProperty("bearerToken")
 
     buildTypes {
         debug {
             signingConfig = signingConfigs.getByName("debug")
             isDebuggable = true
             buildConfigField("String", "BASE_URL", "\"https://api.notion.com/\"")
+            buildConfigField("String", "NOTION_BEARER_TOKEN", "\"$bearerToken\"")
+        }
+        create("benchmark") {
+            initWith(buildTypes.getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
         }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("String", "BASE_URL", "\"https://api.notion.com/\"")
+            buildConfigField("String", "NOTION_BEARER_TOKEN", "\"$bearerToken\"")
         }
     }
 
@@ -50,6 +66,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:model"))
+
     // Android
     implementation(libs.android.core.ktx)
     implementation(libs.android.appcompat)
@@ -68,6 +86,7 @@ dependencies {
 
     // Notion SDK
     implementation(libs.notion.sdk)
+    implementation(libs.notion.sdk.okhttp4)
 
     // Tests
     testImplementation(libs.test.junit)

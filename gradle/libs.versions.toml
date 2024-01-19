@@ -20,12 +20,14 @@ android-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "ap
 android-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
 android-navigation = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+android-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 notion-sdk = { module = "com.github.seratch:notion-sdk-jvm-core", version.ref = "notion-sdk" }
+notion-sdk-okhttp4 = { module = "com.github.seratch:notion-sdk-jvm-okhttp4", version.ref = "notion-sdk" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
 retrofit-base = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
@@ -40,6 +42,7 @@ test-mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockit
 feature-ui = [
     "android-material",
     "android-navigation",
+    "android-navigation-ui",
     "lifecycle-livedata",
     "lifecycle-viewmodel",
 ]
@@ -53,6 +56,8 @@ retrofit = [
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+android-test = { id = "com.android.test", version.ref = "agp" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
